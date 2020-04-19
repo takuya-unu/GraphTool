@@ -11,8 +11,10 @@ export default class InputForm extends React.Component {
       this.state = {var1: 0, var2: 0,var3: 0};
       this.handleChange = this.handleChange.bind(this);
       this.a=((800*this.state.var1-50*this.state.var2)/this.state.var1)*window.innerWidth/1600;
-      this.b=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3-8))/this.state.var1)*window.innerWidth/1600;
-      this.c=((1600*this.state.var1-200*this.state.var1*this.state.var3+50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600;
+      this.b1=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3-8))/this.state.var1)*window.innerWidth/1600;
+      this.b2=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3+8))/this.state.var1)*window.innerWidth/1600;
+      this.c1=((1600*this.state.var1-200*this.state.var1*this.state.var3+50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600;
+      this.c2=(-200*this.state.var3+(50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600;
       this.switch=false;
     }
   
@@ -45,14 +47,14 @@ export default class InputForm extends React.Component {
             <div>
                 {
                     this.a=((800*this.state.var1-50*this.state.var2)/this.state.var1)*window.innerWidth/1600,
-                    this.b=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3-8))/this.state.var1)*window.innerWidth/1600,
-                    this.c=((1600*this.state.var1-200*this.state.var1*this.state.var3+50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600
+                    this.b1=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3-8))/this.state.var1)*window.innerWidth/1600,
+                    this.b2=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3+8))/this.state.var1)*window.innerWidth/1600,
+                    this.c1=((1600*this.state.var1-200*this.state.var1*this.state.var3+50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600,
+                    this.c2=(-200*this.state.var3+(50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600
                 }
             </div>
             <div>
             <Canvas id="c" width={window.innerWidth} height={window.innerHeight} >
-               <Bezier from={
-                   {x: this.a-this.b, y:0}} to={{x:this.a+this.b, y:0}} cp={{x:this.a, y:this.c}} stroke='blue'></Bezier>
                <Line from={{x: 0,y:window.innerHeight/2}} to={{x:window.innerWidth, y:window.innerHeight/2}} stroke='darkblue' ></Line>
                <Line from={{x:window.innerWidth/2,y:0}} to={{x:window.innerWidth/2, y:window.innerHeight}} stroke='darkblue' ></Line>
                <Text text="x" x={window.innerWidth-40} y={window.innerHeight/2-20}></Text>
@@ -62,6 +64,7 @@ export default class InputForm extends React.Component {
                <Text text="8" x={window.innerWidth-40} y={window.innerHeight/2+30}></Text>
                <Text text="-8" x='20' y={window.innerHeight/2+30}></Text>
                <Text text="-8" x={window.innerWidth/2+10} y={window.innerHeight-20}></Text>
+               
                {(() =>{
                     if(this.switch==true){
                         return <Clear x='0' y='0' width={window.innerWidth} height={window.innerHeight} ></Clear>;
@@ -122,19 +125,31 @@ export default class InputForm extends React.Component {
                     }
                     return false;
                 })()}
+                
+                
                 {(() =>{
                     if(this.switch==true){
-                        if(!this.state.var3==0){
-                            return <Text text={this.state.var3} x={window.innerWidth/2+10} y={(830-100*this.state.var3)*window.innerHeight/1600}></Text>    
+                        if(this.state.var3!=0){
+                            return <Text text={this.state.var3} x={window.innerWidth/2+10} y={(830-100*this.state.var3)*window.innerHeight/1600}></Text>
                         }
                     }
                     return false;
                 })()}
-
                 {(() =>{
                     if(this.switch==true){
-                        return <Bezier from={
-                            {x: this.a-this.b, y:0}} to={{x:this.a+this.b, y:0}} cp={{x:this.a, y:this.c}} stroke='blue'></Bezier>;
+                        if(this.state.var1>0){
+                            return <Bezier from={
+                                {x: this.a-this.b1, y:0}} to={{x:this.a+this.b1, y:0}} cp={{x:this.a, y:this.c1}} stroke='blue'></Bezier>;
+                        }
+                    }
+                    return false;
+                })()}
+                {(() =>{
+                    if(this.switch==true){
+                        if(this.state.var1<0){
+                            return <Bezier from={
+                                {x: this.a-this.b2, y:window.innerHeight}} to={{x:this.a+this.b2, y:window.innerHeight}} cp={{x:this.a, y:this.c2}} stroke='blue'></Bezier>;
+                        }
                     }
                     return false;
                 })()}
