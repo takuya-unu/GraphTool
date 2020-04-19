@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import ReactDOM from 'react-dom';
+import Canvas from './components/Canvas';
+import Line from './components/Line';
+import Rect from './components/Rect';
+import Arc from './components/Arc';
+import Bezier from './components/Bezier';
+import InputForm from "./components/InputForm";
 import './App.css';
 
+
+
+
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputForm></InputForm>
+
     </div>
   );
 }
+
+
+
 
 export default App;
