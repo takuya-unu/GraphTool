@@ -30,7 +30,6 @@ export default class InputForm extends React.Component {
           [name]: Number(event.target.value) || 0,  
         }); 
         this.switch=true;
-        
       };
       
     }
@@ -39,18 +38,13 @@ export default class InputForm extends React.Component {
       return (
         <div>
             <div>
-                a:<input type="text" value={this.state.var1 || ''} onChange={this.handleChange('var1')} />
+                y=<input type="text" value={this.state.var1 || ''} onChange={this.handleChange('var1')} />
+                x^2+<input type="text" value={this.state.var2 || ''} onChange={this.handleChange('var2')} />
+                x+<input type="text" value={this.state.var3 || ''} onChange={this.handleChange('var3')} />
             </div>
-          <div>
-              b:<input type="text" value={this.state.var2 || ''} onChange={this.handleChange('var2')} />
-          </div>
-          <div>
-              c:<input type="text" value={this.state.var3 || ''} onChange={this.handleChange('var3')} />
-            </div>
-          <div>
-              y={this.state.var1}x^2+{this.state.var2}x+{this.state.var3}
-              </div>
             <div>
+                グラフ
+            </div>
                 {
                     this.a=((800*this.state.var1-50*this.state.var2)/this.state.var1)*window.innerWidth/1600,
                     this.b1=(50*Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*(this.state.var3-8))/this.state.var1)*window.innerWidth/1600,
@@ -59,9 +53,9 @@ export default class InputForm extends React.Component {
                     this.c2=(-200*this.state.var3+(50*this.state.var2*this.state.var2)/this.state.var1)*window.innerHeight/1600,
                     this.d1=(16*this.state.var1-this.state.var2-Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*this.state.var3))/this.state.var1/2,
                     this.d2=(16*this.state.var1-this.state.var2+Math.sqrt(this.state.var2*this.state.var2-4*this.state.var1*this.state.var3))/this.state.var1/2,
-                    this.d=this.state.var2*this.state.var2-4*this.state.var1*this.state.var3
+                    this.d=this.state.var2*this.state.var2-4*this.state.var1*this.state.var3,
+                    <null></null>
                 }
-            </div>
             <div>
             <Canvas id="c" width={window.innerWidth} height={window.innerHeight} >
                <Line from={{x: 0,y:window.innerHeight/2}} to={{x:window.innerWidth, y:window.innerHeight/2}} stroke='darkblue' ></Line>
@@ -154,19 +148,7 @@ export default class InputForm extends React.Component {
                     return false;
                 })()}
 
-
-
-
-
-
-
-
-
-
 /*下に凸 */                
-                
-                
-                
                 
                 {(() =>{
                     if(this.switch==true){
@@ -512,24 +494,9 @@ export default class InputForm extends React.Component {
                     }
                     return false;
                 })()}
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
 /*上に凸 */                
-                
-                
-                
-                
-                
-                
+
                 {(() =>{
                     if(this.switch==true){
                         if(this.state.var1<0){
@@ -875,68 +842,20 @@ export default class InputForm extends React.Component {
                     return false;
                 })()}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                {(() =>{
+                    if(this.switch==true){
+                        if(this.state.var1>0){
+                            return <Bezier from={
+                                {x: this.a-this.b1, y:0}} to={{x:this.a+this.b1, y:0}} cp={{x:this.a, y:this.c1}} stroke='red'></Bezier>;
+                        }
+                    }
+                    return false;
+                })()}
                 {(() =>{
                     if(this.switch==true){
                         if(this.state.var1<0){
                             return <Bezier from={
-                                {x: this.a-this.b2, y:window.innerHeight}} to={{x:this.a+this.b2, y:window.innerHeight}} cp={{x:this.a, y:this.c2}} stroke='blue'></Bezier>;
+                                {x: this.a-this.b2, y:window.innerHeight}} to={{x:this.a+this.b2, y:window.innerHeight}} cp={{x:this.a, y:this.c2}} stroke='red'></Bezier>;
                         }
                     }
                     return false;
@@ -954,4 +873,3 @@ export default class InputForm extends React.Component {
       );
     }
   }
-  
