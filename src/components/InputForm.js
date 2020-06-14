@@ -39,8 +39,22 @@ export default class InputForm extends React.Component {
         <div>
             <div>
                 y=<input type="text" value={this.state.var1 || ''} onChange={this.handleChange('var1')} />
-                x^2+<input type="text" value={this.state.var2 || ''} onChange={this.handleChange('var2')} />
-                x+<input type="text" value={this.state.var3 || ''} onChange={this.handleChange('var3')} />
+                x^2
+                {(() =>{
+                    if(this.state.var2>=0){
+                        return "+";
+                    }
+                    return false;
+                })()}
+                <input type="text" value={this.state.var2 || ''} onChange={this.handleChange('var2')} />
+                x
+                {(() =>{
+                    if(this.state.var2>=0){
+                        return "+";
+                    }
+                    return false;
+                })()}
+                <input type="text" value={this.state.var3 || ''} onChange={this.handleChange('var3')} />
             </div>
             <div>
                 グラフ
